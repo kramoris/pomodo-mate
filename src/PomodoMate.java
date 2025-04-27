@@ -9,6 +9,23 @@ public class PomodoMate {
     public static void main(String[] args) throws InterruptedException, IOException {
         Scanner scanner = new Scanner(System.in);
 
+        // ---- XP Display ----
+        int xp = 0;
+        Path xpFile = Paths.get("xp.txt");
+        if (Files.exists(xpFile)) {
+            String content = Files.readAllLines(xpFile).get(0).trim();
+            if (!content.isEmpty()) xp = Integer.parseInt(content);
+        }
+
+        int level = 0, threshold = 1;
+        while (threshold <= xp) {
+            level++;
+            threshold *= 2;
+        }
+
+        System.out.println("Welcome back! You’re at level " + level + " with " + xp + " XP.");
+        // ---------------------
+
         // --- Get times ---
         System.out.print("Focus minutes (default 25): ");
         String f = scanner.nextLine().trim();
@@ -26,17 +43,11 @@ public class PomodoMate {
         }
 
         // ---- XP Tracking ----
-        int xp = 0;
-        Path xpFile = Paths.get("xp.txt");
-        if (Files.exists(xpFile)) {
-            String content = Files.readAllLines(xpFile).get(0).trim();
-            if (!content.isEmpty()) xp = Integer.parseInt(content);
-        }
-
         xp += 1;
         Files.write(xpFile, Collections.singletonList(String.valueOf(xp)));
 
-        int level = 0, threshold = 1;
+        level = 0;
+        threshold = 1;
         while (threshold <= xp) {
             level++;
             threshold *= 2;
