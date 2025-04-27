@@ -1,7 +1,12 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class PomodoMate {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         Scanner scanner = new Scanner(System.in);
 
         // --- Get times ---
@@ -18,6 +23,28 @@ public class PomodoMate {
         for (int i = 1; i <= focus; i++) {
             Thread.sleep(60 * 1000);
             System.out.println("  ✔ " + i + " minute(s) done");
+        }
+
+        // ---- XP Tracking ----
+        int xp = 0;
+        Path xpFile = Paths.get("xp.txt");
+        if (Files.exists(xpFile)) {
+            String content = Files.readAllLines(xpFile).get(0).trim();
+            if (!content.isEmpty()) xp = Integer.parseInt(content);
+        }
+
+        xp += 1;
+        Files.write(xpFile, Collections.singletonList(String.valueOf(xp)));
+
+        int level = 0, threshold = 1;
+        while (threshold <= xp) {
+            level++;
+            threshold *= 2;
+        }
+
+        System.out.println("You earned 1 XP! Total XP: " + xp);
+        if (xp == (threshold / 2)) {
+            System.out.println("🎉 Level up! You’re now level " + level);
         }
 
         // --- Break session ---
