@@ -1,22 +1,21 @@
 # PomodoMate ⏲️
 
-A simple Java console Pomodoro timer with a progress bar and XP leveling.
+A Java console Pomodoro timer with a progress bar and XP leveling.
 
 ---
 
-## What it will do
+## What it does
 
-- Let you set focus/break times
-- Show a live ASCII progress bar
-- Award XP and level up after each focus session
-- (Logs sessions to a file)
+- Lets you set focus and break times
+- Shows minute-by-minute progress during each session
+- Awards XP and lets you level up after each focus session
 
 ---
 
 ## How to run
 
 1. Compile:  
-   `javac src/pomodoMate.java`
+   `javac src/PomodoMate.java`
 
 2. Run:  
-   `java -cp src pomodoMate`
+   `java -cp src PomodoMate`
